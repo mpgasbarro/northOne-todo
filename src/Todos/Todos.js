@@ -7,10 +7,12 @@ const Todos = (props) => {
 			{props.todo.map((x) => {
 				return (
 					<div>
-						<h1>
-							{' '}
-							{x.todo} {x.description}{' '}
-						</h1>
+						<li>
+							<button>
+								{' '}
+								{x.todo} {x.description} {x.urgency} {x.date.toString()}{' '}
+							</button>
+						</li>
 					</div>
 				);
 			})}

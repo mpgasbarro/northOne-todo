@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
+import Todos from '../Todos/Todos';
 
 class Home extends Component {
 	constructor(props) {
@@ -9,6 +10,7 @@ class Home extends Component {
 			description: '',
 			urgency: '',
 			date: '',
+			showList: false,
 		};
 	}
 
@@ -21,13 +23,18 @@ class Home extends Component {
 	handleChangeUrgency = (e) => {
 		this.setState({ urgency: e.target.value });
 	};
-	handleChangeDate = (e) => {
-		this.setState({ todo: e.target.value });
+	handleChangeDate = (date) => {
+		this.setState({ date });
+	};
+
+	onSubmit = (e) => {
+		e.preventDefault();
+		this.setState({ showList: true });
 	};
 
 	render() {
 		console.log(this.state.todo);
-		console.log(this.state.description);
+		console.log(this.state.showList);
 		return (
 			<div>
 				<header> Task Buddy</header>
@@ -55,10 +62,18 @@ class Home extends Component {
 						</label>
 						<label>
 							Date:
-							<Calendar />
+							{/* <Calendar
+								// value={this.state.date}
+								onChange={this.handleChangeDate}
+							/> */}
 						</label>
-						<button> Submit</button>
+						<button onClick={this.onSubmit}> Submit</button>
 					</form>
+					{this.state.showList && (
+						<div>
+							<Todos todo={this.state.todo} />
+						</div>
+					)}
 				</div>
 			</div>
 		);

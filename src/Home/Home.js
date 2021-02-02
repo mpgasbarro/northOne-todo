@@ -61,8 +61,6 @@ class Home extends Component {
 	};
 
 	render() {
-		console.log(this.state.allTodos);
-		console.log(this.state.arrayOfTodos);
 		return (
 			<div>
 				<header> Task Buddy</header>

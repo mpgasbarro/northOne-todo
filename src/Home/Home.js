@@ -6,26 +6,46 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todo: '',
-			description: '',
-			urgency: '',
-			date: '',
-			showList: false,
 			allTodos: {
 				todo: '',
 				description: '',
 				urgency: '',
+				// todo: '',
+				// description: '',
+				// urgency: '',
+				// date: '',
 			},
+			showList: false,
 			arrayOfTodos: [],
 		};
 	}
 
-	handleChange = (e) => {
-		const { todo, value } = e.target;
-
-		this.setState((prevState) => ({
-			todos: { ...prevState.allTodos, [todo]: value },
-		}));
+	handleChangeTodo = (e) => {
+		console.log(e.target);
+		this.setState({
+			allTodos: {
+				...this.state.allTodos,
+				todo: e.target.value,
+			},
+		});
+	};
+	handleChangeDescription = (e) => {
+		console.log(e.target);
+		this.setState({
+			allTodos: {
+				...this.state.allTodos,
+				description: e.target.value,
+			},
+		});
+	};
+	handleChangeUrgency = (e) => {
+		console.log(e.target);
+		this.setState({
+			allTodos: {
+				...this.state.allTodos,
+				urgency: e.target.value,
+			},
+		});
 	};
 
 	handleSubmit = (e) => {
@@ -35,6 +55,7 @@ class Home extends Component {
 			arrayOfTodos: [...prevState.arrayOfTodos, prevState.allTodos],
 			allTodos: { todo: '', description: '', urgency: '' },
 		}));
+		this.setState({ showList: true });
 	};
 
 	// handleChangeTodo = (e) => {
@@ -70,7 +91,7 @@ class Home extends Component {
 								type='text'
 								name='todo'
 								value={this.state.allTodos.todo}
-								onChange={this.handleChange}
+								onChange={this.handleChangeTodo}
 							/>
 						</label>
 						<label>
@@ -78,7 +99,7 @@ class Home extends Component {
 							<input
 								type='text'
 								name='description'
-								onChange={this.handleChange}
+								onChange={this.handleChangeDescription}
 								value={this.state.allTodos.description}
 							/>
 						</label>
@@ -87,7 +108,7 @@ class Home extends Component {
 							<input
 								type='text'
 								name='urgency'
-								onChange={this.handleChange}
+								onChange={this.handleChangeUrgency}
 								value={this.state.allTodos.urgency}
 							/>
 						</label>
@@ -102,7 +123,7 @@ class Home extends Component {
 					</form>
 					{this.state.showList && (
 						<div>
-							<Todos todo={this.state.todo} />
+							<Todos todo={this.state.arrayOfTodos} />
 						</div>
 					)}
 				</div>

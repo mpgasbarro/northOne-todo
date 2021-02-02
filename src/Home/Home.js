@@ -10,10 +10,7 @@ class Home extends Component {
 				todo: '',
 				description: '',
 				urgency: '',
-				// todo: '',
-				// description: '',
-				// urgency: '',
-				// date: '',
+				date: new Date(),
 			},
 			showList: false,
 			arrayOfTodos: [],
@@ -21,7 +18,6 @@ class Home extends Component {
 	}
 
 	handleChangeTodo = (e) => {
-		console.log(e.target);
 		this.setState({
 			allTodos: {
 				...this.state.allTodos,
@@ -30,7 +26,6 @@ class Home extends Component {
 		});
 	};
 	handleChangeDescription = (e) => {
-		console.log(e.target);
 		this.setState({
 			allTodos: {
 				...this.state.allTodos,
@@ -39,11 +34,18 @@ class Home extends Component {
 		});
 	};
 	handleChangeUrgency = (e) => {
-		console.log(e.target);
 		this.setState({
 			allTodos: {
 				...this.state.allTodos,
 				urgency: e.target.value,
+			},
+		});
+	};
+	handleChangeDate = (date) => {
+		this.setState({
+			allTodos: {
+				...this.state.allTodos,
+				date: date,
 			},
 		});
 	};
@@ -53,29 +55,10 @@ class Home extends Component {
 
 		this.setState((prevState) => ({
 			arrayOfTodos: [...prevState.arrayOfTodos, prevState.allTodos],
-			allTodos: { todo: '', description: '', urgency: '' },
+			allTodos: { todo: '', description: '', urgency: '', date: new Date() },
 		}));
 		this.setState({ showList: true });
 	};
-
-	// handleChangeTodo = (e) => {
-	//     this.setState({ todo: e.target.value })
-	//     this.setState({allTodos[todo]: e.target.value});
-	// };
-	// handleChangeDescription = (e) => {
-	// 	this.setState({ description: e.target.value });
-	// };
-	// handleChangeUrgency = (e) => {
-	// 	this.setState({ urgency: e.target.value });
-	// };
-	// handleChangeDate = (date) => {
-	// 	this.setState({ date });
-	// };
-
-	// onSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	this.setState({ showList: true });
-	// };
 
 	render() {
 		console.log(this.state.allTodos);
@@ -114,10 +97,11 @@ class Home extends Component {
 						</label>
 						<label>
 							Date:
-							{/* <Calendar
+							<Calendar
 								// value={this.state.date}
 								onChange={this.handleChangeDate}
-							/> */}
+								value={this.state.allTodos.date}
+							/>
 						</label>
 						<button onClick={this.handleSubmit}> Submit</button>
 					</form>

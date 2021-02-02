@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Calendar from 'react-calendar';
 
 class Home extends Component {
 	constructor(props) {
@@ -14,9 +15,19 @@ class Home extends Component {
 	handleChangeTodo = (e) => {
 		this.setState({ todo: e.target.value });
 	};
+	handleChangeDescription = (e) => {
+		this.setState({ description: e.target.value });
+	};
+	handleChangeUrgency = (e) => {
+		this.setState({ urgency: e.target.value });
+	};
+	handleChangeDate = (e) => {
+		this.setState({ todo: e.target.value });
+	};
 
 	render() {
 		console.log(this.state.todo);
+		console.log(this.state.description);
 		return (
 			<div>
 				<header> Task Buddy</header>
@@ -28,16 +39,25 @@ class Home extends Component {
 						</label>
 						<label>
 							Description:
-							<input type='text' name='description' />
+							<input
+								type='text'
+								name='description'
+								onChange={this.handleChangeDescription}
+							/>
 						</label>
 						<label>
 							Urgency:
-							<input type='text' name='urgency' />
+							<input
+								type='text'
+								name='urgency'
+								onChange={this.handleChangeUrgency}
+							/>
 						</label>
 						<label>
 							Date:
-							<input type='text' name='date' />
+							<Calendar />
 						</label>
+						<button> Submit</button>
 					</form>
 				</div>
 			</div>

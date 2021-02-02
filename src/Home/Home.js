@@ -10,7 +10,13 @@ class Home extends Component {
 			date: '',
 		};
 	}
+
+	handleChangeTodo = (e) => {
+		this.setState({ todo: e.target.value });
+	};
+
 	render() {
+		console.log(this.state.todo);
 		return (
 			<div>
 				<header> Task Buddy</header>
@@ -18,7 +24,7 @@ class Home extends Component {
 					<form>
 						<label>
 							To-Do:
-							<input type='text' name='task' />
+							<input type='text' name='todo' onChange={this.handleChangeTodo} />
 						</label>
 						<label>
 							Description:

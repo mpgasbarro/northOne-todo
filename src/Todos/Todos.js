@@ -66,7 +66,12 @@ const Todos = (props) => {
 					</div>
 				);
 			})}
-			{showModal && <div> {update} </div>}
+			{showModal && (
+				<div>
+					{' '}
+					<update />{' '}
+				</div>
+			)}
 		</div>
 	);
 };

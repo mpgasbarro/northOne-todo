@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import Todos from '../Todos/Todos';
+import 'react-calendar/dist/Calendar.css';
 
 class Home extends Component {
 	constructor(props) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import Todos from '../Todos/Todos';
+import 'react-calendar/dist/Calendar.css';
 
 class Home extends Component {
 	constructor(props) {
@@ -61,8 +62,6 @@ class Home extends Component {
 	};
 
 	render() {
-		console.log(this.state.allTodos);
-		console.log(this.state.arrayOfTodos);
 		return (
 			<div>
 				<header> Task Buddy</header>
@@ -107,7 +106,14 @@ class Home extends Component {
 					</form>
 					{this.state.showList && (
 						<div>
-							<Todos todo={this.state.arrayOfTodos} />
+							<Todos
+								handleChangeTodo={this.handleChangeTodo}
+								handleChangeDescription={this.handleChangeDescription}
+								handleChangeUrgency={this.handleChangeUrgency}
+								handleChangeDate={this.handleChangeDate}
+								handleSubmit={this.handleSubmit}
+								todo={this.state.arrayOfTodos}
+							/>
 						</div>
 					)}
 				</div>

@@ -106,7 +106,14 @@ class Home extends Component {
 					</form>
 					{this.state.showList && (
 						<div>
-							<Todos todo={this.state.arrayOfTodos} />
+							<Todos
+								handleChangeTodo={this.handleChangeTodo}
+								handleChangeDescription={this.handleChangeDescription}
+								handleChangeUrgency={this.handleChangeUrgency}
+								handleChangeDate={this.handleChangeDate}
+								handleSubmit={this.handleSubmit}
+								todo={this.state.arrayOfTodos}
+							/>
 						</div>
 					)}
 				</div>

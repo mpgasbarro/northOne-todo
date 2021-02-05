@@ -64,6 +64,7 @@ class Home extends Component {
 
 		if (this.state.showModal) {
 			this.state.arrayOfTodos.splice(0, 1);
+			this.setState({ showModal: false });
 		}
 	};
 

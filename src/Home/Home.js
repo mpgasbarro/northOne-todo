@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import Todos from '../Todos/Todos';
+import Modal from '../Modal/Modal';
 import 'react-calendar/dist/Calendar.css';
 
 class Home extends Component {
@@ -15,6 +16,7 @@ class Home extends Component {
 			},
 			showList: false,
 			arrayOfTodos: [],
+			showModal: false,
 		};
 	}
 
@@ -59,9 +61,18 @@ class Home extends Component {
 			allTodos: { todo: '', description: '', urgency: '', date: new Date() },
 		}));
 		this.setState({ showList: true });
+
+		if (this.state.showModal) {
+			this.state.arrayOfTodos.splice(0, 1);
+		}
+	};
+
+	handleShowModal = () => {
+		this.setState({ showModal: true });
 	};
 
 	render() {
+		console.log(this.state.arrayOfTodos);
 		return (
 			<div>
 				<header> Task Buddy</header>
@@ -107,12 +118,21 @@ class Home extends Component {
 					{this.state.showList && (
 						<div>
 							<Todos
+								todo={this.state.arrayOfTodos}
+								showModal={this.state.showModal}
+								handleShowModal={this.handleShowModal}
+							/>
+						</div>
+					)}
+					{this.state.showModal && (
+						<div>
+							<Modal
+								todo={this.state.arrayOfTodos}
 								handleChangeTodo={this.handleChangeTodo}
 								handleChangeDescription={this.handleChangeDescription}
 								handleChangeUrgency={this.handleChangeUrgency}
 								handleChangeDate={this.handleChangeDate}
 								handleSubmit={this.handleSubmit}
-								todo={this.state.arrayOfTodos}
 							/>
 						</div>
 					)}

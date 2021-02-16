@@ -4,7 +4,6 @@ import 'react-calendar/dist/Calendar.css';
 
 class Modal extends Component {
 	render(props) {
-		console.log(this.props.todo);
 		return (
 			<div>
 				<form>

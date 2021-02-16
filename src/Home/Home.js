@@ -17,6 +17,7 @@ class Home extends Component {
 			showList: false,
 			arrayOfTodos: [],
 			showModal: false,
+			index: 0,
 		};
 	}
 
@@ -63,17 +64,18 @@ class Home extends Component {
 		this.setState({ showList: true });
 
 		if (this.state.showModal) {
-			this.state.arrayOfTodos.splice(0, 1);
+			this.state.arrayOfTodos.splice(this.state.index, 1);
 			this.setState({ showModal: false });
 		}
 	};
 
-	handleShowModal = () => {
+	handleShowModal = (index) => {
+		console.log(index);
+		this.setState({ index: index });
 		this.setState({ showModal: true });
 	};
 
 	render() {
-		console.log(this.state.arrayOfTodos);
 		return (
 			<div>
 				<header> Task Buddy</header>
@@ -119,6 +121,7 @@ class Home extends Component {
 					{this.state.showList && (
 						<div>
 							<Todos
+								index={this.state.index}
 								todo={this.state.arrayOfTodos}
 								showModal={this.state.showModal}
 								handleShowModal={this.handleShowModal}

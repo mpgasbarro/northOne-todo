@@ -8,14 +8,14 @@ const Todos = (props) => {
 				return (
 					<div>
 						<li key={index}>
-							{index}
-							{x.todo} {x.description} {x.urgency} {x.date.toString()}{' '}
+							To-Do: {x.todo} Description: {x.description} How Urgent:{' '}
+							{x.urgency} Due on: {x.date.toString()}{' '}
 							<button
 								index={index}
 								onClick={() => props.handleShowModal(index)}>
 								Update
 							</button>
-							<button> Delete</button>
+							<button onClick={() => props.handleDelete(index)}> Delete</button>
 						</li>
 					</div>
 				);

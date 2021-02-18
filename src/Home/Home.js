@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import Todos from '../Todos/Todos';
 import Modal from '../Modal/Modal';
-import 'react-calendar/dist/Calendar.css';
+// import 'react-calendar/dist/Calendar.css';
+import './Home.css';
 
 class Home extends Component {
 	constructor(props) {
@@ -21,6 +22,7 @@ class Home extends Component {
 		};
 	}
 
+	// Handles the change of the To-do task
 	handleChangeTodo = (e) => {
 		this.setState({
 			allTodos: {
@@ -29,6 +31,8 @@ class Home extends Component {
 			},
 		});
 	};
+
+	// Handles the change of the Description
 	handleChangeDescription = (e) => {
 		this.setState({
 			allTodos: {
@@ -37,6 +41,8 @@ class Home extends Component {
 			},
 		});
 	};
+
+	// Handles the change of the Urgency
 	handleChangeUrgency = (e) => {
 		this.setState({
 			allTodos: {
@@ -45,6 +51,8 @@ class Home extends Component {
 			},
 		});
 	};
+
+	// Handles the change of the Date
 	handleChangeDate = (date) => {
 		this.setState({
 			allTodos: {
@@ -54,31 +62,42 @@ class Home extends Component {
 		});
 	};
 
+	// Used on all Submit buttons throughout App
 	handleSubmit = (e) => {
 		e.preventDefault();
 
+		// Sets the state of arrayOfTodos, which we will then pass down to our child component
 		this.setState((prevState) => ({
 			arrayOfTodos: [...prevState.arrayOfTodos, prevState.allTodos],
+			// Resetting the values of allTodos, for additional user input
 			allTodos: { todo: '', description: '', urgency: '', date: new Date() },
 		}));
+		// Setting the showList state to true, to show our todo list
 		this.setState({ showList: true });
 
+		// If showModal is true, we will then splice out the old value at that index and replace with the new. Also resets Modal value to false
 		if (this.state.showModal) {
 			this.state.arrayOfTodos.splice(this.state.index, 1);
 			this.setState({ showModal: false });
 		}
 	};
 
+	// Handles setting the state of Index from the Todos component and sets the state of showing the modal
 	handleShowModal = (index) => {
-		console.log(index);
 		this.setState({ index: index });
 		this.setState({ showModal: true });
+	};
+
+	// Handles deleting an item
+	handleDelete = (index) => {
+		this.state.arrayOfTodos.splice(this.state.index, 1);
 	};
 
 	render() {
 		return (
 			<div>
 				<header> Task Buddy</header>
+
 				<div>
 					<form>
 						<label>
@@ -111,13 +130,14 @@ class Home extends Component {
 						<label>
 							Date:
 							<Calendar
-								// value={this.state.date}
+								value={this.state.date}
 								onChange={this.handleChangeDate}
 								value={this.state.allTodos.date}
 							/>
 						</label>
 						<button onClick={this.handleSubmit}> Submit</button>
 					</form>
+					{/* Conditionally rendering the list of to-do items */}
 					{this.state.showList && (
 						<div>
 							<Todos
@@ -125,9 +145,11 @@ class Home extends Component {
 								todo={this.state.arrayOfTodos}
 								showModal={this.state.showModal}
 								handleShowModal={this.handleShowModal}
+								handleDelete={this.handleDelete}
 							/>
 						</div>
 					)}
+					{/* Conditionally shows the modal while updating the task */}
 					{this.state.showModal && (
 						<div>
 							<Modal
